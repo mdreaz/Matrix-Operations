@@ -3,7 +3,7 @@ object Matrix {
   type Matrix = List[List[Int]]
 
   // Given a row and component number, n in the range 1..n,
-  // return the nth component of the row
+  // returns the nth component of the row
   // e.g. extractComponent(List(4,3,5,7,8),3) = 5
   def extractComponent(row: List[Int], n: Int): Int = row match {
     case Nil => -1
@@ -11,7 +11,7 @@ object Matrix {
   }
 
   // Given a matrix m, and column number n in the range 1..n,
-  // return the nth column from the matrix
+  // returns the nth column from the matrix
   // e.g. extractColumn(List(List(1,2,3),List(4,5,6)),3) = List(3,6)
   def extractColumn(m: Matrix, n: Int): List[Int] = 
     for {i <- m} yield extractComponent(i,n)
@@ -25,7 +25,7 @@ object Matrix {
   }
 
 
-  // similar to extractColumn except this function returns the matrix
+  // Returns the given matrix
   // after removing the nth column
   // e.g. removeColumn(List(List(1,2,3),List(4,5,6)),1) = List(List(2,3),List(5,6))
   def removeColumn(m: Matrix, n: Int): Matrix = 
@@ -38,7 +38,7 @@ object Matrix {
   def transpose(m: Matrix): Matrix = 
     for (x <- (1 to m(1).length).toList ) yield extractColumn(m,x)
 
-  // we have seen this in the slides before!
+  // Computes the scalar product.
   // xs = List(3,4,7), ys = List(2,9,10)
   // scalarProduct(xs,ys) = 3*2+4*9+7*10 = 112
   def scalarProduct(xs: List[Int], ys: List[Int]): Int =
@@ -53,6 +53,7 @@ object Matrix {
   def mmul(m: Matrix, n: Matrix): Matrix =
     for (i <- m) yield rowMul(i,n)
 
+  // Multiplies two matrices
   // m2 = List(List(1,2),List(3,4))
   // m3 = List(List(5,6),List(7,8))
   // matrixMultiply(m2,m3) = List(List(19, 22), List(43, 50))
@@ -63,10 +64,8 @@ object Matrix {
   def matrixMultiply(m: Matrix, n: Matrix): Matrix = 
     mmul(m,transpose(n))
 
-  // For extra credit; 
-  // Look up definition at
-  // https://www.mathsisfun.com/algebra/matrix-determinant.html
-  // and solve this for any size square matrix
+  
+  // Computes the determinant for any square matrix
   // determinant(List(List(6,1,1),List(4,-2,5),List(2,8,7)) = -306
   def determinant(m: Matrix): Int = m match{
     case Nil           => 0
